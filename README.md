@@ -35,9 +35,11 @@ How to use component:
 [Emmet (HTML genrator)](https://docs.emmet.io/cheat-sheet/)
 
 ## 2. Components
+```sh
+$ ng g c about # Generate Component about
+```
 
-
-## 3. Interpolation, Property & Event Binding
+## 4. Interpolation, Property & Event Binding
 - Interpolation : `value="{{btnText}}"`
 - Property Binding : `[value]="btnText"`
 - Event Binding : `(click)="addItem()"`
@@ -68,7 +70,7 @@ In order to use ng-model we have to install `@angular/forms`
     ```
 
 
-## 4. Animation
+## 5. Animation
 1. Install @angular/animations :
     ```sh
     $ npm install @angular/animations@latest --save
@@ -78,4 +80,55 @@ In order to use ng-model we have to install `@angular/forms`
         ```typescript
         import {trigger, style, transition, animate, keyframes, stagger} from '@angular/animations';
         ```
+
+
+## 6. Routing
+### `app-routing.module.ts` 
+Add :
+```typescript
+import { HomeComponent } from './home/home.component'
+import { AboutComponent } from './about/about.component'
+
+const routes: Routes = [
+  { path:'', component: HomeComponent },
+  { path:'about/:id', component: AboutComponent }
+];
+```
+### `app.component.html` :
+Change Html to :
+```html
+<ul>
+  <li><a routerLink="">Home</a></li>
+  <li><a routerLink="about/48">About</a></li>
+</ul>
+<router-outlet></router-outlet>
+```
+
+### `about.component.ts`
+Add:
+```typescript
+import { ActivatedRoute, Router } from '@angular/router';
+
+...
+...
+
+  constructor(private route: ActivatedRoute,private router: Router) 
+  {
+    // this.route.params.subscribe(res=>console.log(res.id));
+  }
+
+  sendMeHome()
+  {
+    this.router.navigate(['']);
+  }
+```
+
+### `about.component.html`
+Add:
+```html
+  <a href="javascript:;" (click)="sendMeHome()">
+    <strong>take me back</strong>
+  </a>
+```
+
 
