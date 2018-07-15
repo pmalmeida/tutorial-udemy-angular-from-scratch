@@ -136,3 +136,11 @@ Add:
 ```sh
 $ ng g s data
 ```
+Changes: 
+```
+source/src/app/about/about.component.html
+source/src/app/about/about.component.ts
+source/src/app/app.module.ts
+source/src/app/data.service.ts
+source/src/app/home/home.component.ts
+```
