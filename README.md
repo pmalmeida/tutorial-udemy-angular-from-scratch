@@ -132,3 +132,7 @@ Add:
 ```
 
 
+## 7 Services
+```sh
+$ ng g s data
+```
