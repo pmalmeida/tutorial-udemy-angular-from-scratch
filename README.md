@@ -144,3 +144,18 @@ source/src/app/app.module.ts
 source/src/app/data.service.ts
 source/src/app/home/home.component.ts
 ```
+
+## 8 Deploytment
+Generate distribution:
+```sh
+$ ng build --prod
+```
+Deploy:
+```sh
+$ ng build --prod
+```
+### Install *angular-cli-ghpages*
+Deployment CLI
+```sh
+$ npm i -g angular-cli-ghpages
+```
