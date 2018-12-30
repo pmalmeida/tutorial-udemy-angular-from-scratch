@@ -20,7 +20,7 @@ $ ng new ng5 --style=scss --routing
 ### Run DEV Application Server
 ```sh
 $ cd ng5
-$ ng s (or: ng server)
+$ ng s # or: ng server
 ```
 
 ## 2. Components
