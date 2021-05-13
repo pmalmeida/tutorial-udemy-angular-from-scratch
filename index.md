@@ -1,37 +1,161 @@
-## Welcome to GitHub Pages
+# Course : Learn Angular 5 from Scratch : Free
+[Udemy Course ](https://www.udemy.com/angular-5/learn/v4/overview)
 
-You can use the [editor on GitHub](https://github.com/pmalmeida/tutorial-udemy-angular-from-scratch/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+## 1. Install Angular 5
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Install Angular Command Line Interface (CLI)
+We only need to install *angular cli* once.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+[Angular CLI Documentation](https://github.com/angular/angular-cli/wiki)
+```
+$ npm install @angular/cli -g
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### Create project 
+Command to create angular base with scss and rounting:
+```
+$ ng new ng5 --style=scss --routing
+```
 
-### Jekyll Themes
+### Run DEV Application Server
+```sh
+$ cd ng5
+$ ng s # or: ng server
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/pmalmeida/tutorial-udemy-angular-from-scratch/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## 2. Components
+### Basic Commands
+```sh
+$ ng g c home # Generate Component home
+```
+How to use component:
+![asdasdsad](assets/component-element.png)
 
-### Support or Contact
+## 3. Templating & Styling
+[Emmet (HTML genrator)](https://docs.emmet.io/cheat-sheet/)
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## 2. Components
+```sh
+$ ng g c about # Generate Component about
+```
+
+## 4. Interpolation, Property & Event Binding
+- Interpolation : `value="{{btnText}}"`
+- Property Binding : `[value]="btnText"`
+- Event Binding : `(click)="addItem()"`
+    - Add function to `home.component.ts`:         
+        ```typescript
+        addItem() {
+            this.goals.push(this.goalText);
+            this.goalText = '';
+            this.itemCount = this.goals.length;
+        }
+        ```
+
+### Two way data binding :
+In order to use ng-model we have to install `@angular/forms`
+
+1. Edit app.module.ts. 
+    - Add import
+        - `import {FormsModule} from '@angular/forms';`
+    - Add to imports array
+        - `FormsModule`
+2. Two way databinding html attribute :
+    - square brackets with parentheses inside `[(ngModel)]="goalText"`
+3. How to render array :
+    ```html
+    <p class="life-container" *ngFor="let goal of goals">
+            {{goal}}
+    </p>
+    ```
+
+
+## 5. Animation
+1. Install @angular/animations :
+    ```sh
+    $ npm install @angular/animations@latest --save
+    ```
+    - Setup app.modules.ts :  `import {BrowserAnimationsModule} from '@angular/platform-browser/animations';`
+    - Import animations on `home.component.ts` : 
+        ```typescript
+        import {trigger, style, transition, animate, keyframes, stagger} from '@angular/animations';
+        ```
+
+
+## 6. Routing
+### `app-routing.module.ts` 
+Add :
+```typescript
+import { HomeComponent } from './home/home.component'
+import { AboutComponent } from './about/about.component'
+
+const routes: Routes = [
+  { path:'', component: HomeComponent },
+  { path:'about/:id', component: AboutComponent }
+];
+```
+### `app.component.html` :
+Change Html to :
+```html
+<ul>
+  <li><a routerLink="">Home</a></li>
+  <li><a routerLink="about/48">About</a></li>
+</ul>
+<router-outlet></router-outlet>
+```
+
+### `about.component.ts`
+Add:
+```typescript
+import { ActivatedRoute, Router } from '@angular/router';
+
+...
+...
+
+  constructor(private route: ActivatedRoute,private router: Router) 
+  {
+    // this.route.params.subscribe(res=>console.log(res.id));
+  }
+
+  sendMeHome()
+  {
+    this.router.navigate(['']);
+  }
+```
+
+### `about.component.html`
+Add:
+```html
+  <a href="javascript:;" (click)="sendMeHome()">
+    <strong>take me back</strong>
+  </a>
+```
+
+
+## 7 Services
+```sh
+$ ng g s data
+```
+Changes: 
+```
+source/src/app/about/about.component.html
+source/src/app/about/about.component.ts
+source/src/app/app.module.ts
+source/src/app/data.service.ts
+source/src/app/home/home.component.ts
+```
+
+## 8 Deploytment
+Generate distribution:
+```sh
+$ ng build --prod
+```
+Deploy:
+```sh
+$ ng build --prod
+```
+### Install *angular-cli-ghpages*
+Deployment CLI
+```sh
+$ npm i -g angular-cli-ghpages
+```
